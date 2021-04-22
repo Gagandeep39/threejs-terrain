@@ -12,11 +12,18 @@ const canvas = document.querySelector('canvas.webgl');
 const scene = new THREE.Scene();
 
 // Objects
+const geometry = new THREE.PlaneBufferGeometry(3, 3, 64, 64);
 
 // Materials
-
+const material = new THREE.MeshStandardMaterial({
+  color: 'red',
+});
 
 // Mesh
+const plane = new THREE.Mesh(geometry, material);
+scene.add(plane);
+gui.add(plane.rotation, 'x')
+
 
 // Lights
 
@@ -60,7 +67,7 @@ const camera = new THREE.PerspectiveCamera(
 );
 camera.position.x = 0;
 camera.position.y = 0;
-camera.position.z = 2;
+camera.position.z = 3;
 scene.add(camera);
 
 // Controls
@@ -86,7 +93,7 @@ const tick = () => {
   const elapsedTime = clock.getElapsedTime();
 
   // Update objects
-  sphere.rotation.y = 0.5 * elapsedTime;
+  // sphere.rotation.y = 0.5 * elapsedTime;
 
   // Update Orbital Controls
   // controls.update()

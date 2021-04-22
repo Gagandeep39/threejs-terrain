@@ -2,6 +2,8 @@ import './style.css';
 import * as THREE from 'three';
 import * as dat from 'dat.gui';
 
+const loader = new THREE.TextureLoader();
+const texture = loader.load('/texture.jpg');
 // Debug
 const gui = new dat.GUI();
 
@@ -17,11 +19,12 @@ const geometry = new THREE.PlaneBufferGeometry(3, 3, 64, 64);
 // Materials
 const material = new THREE.MeshStandardMaterial({
   color: 'gray',
+  map: texture,
 });
 
 // Mesh
 const plane = new THREE.Mesh(geometry, material);
-plane.rotation.x = 181
+plane.rotation.x = 181;
 scene.add(plane);
 gui.add(plane.rotation, 'x').min(0).max(600).step(1);
 
@@ -41,8 +44,8 @@ const lightColor = {
   color: '#00ff00',
 };
 gui.addColor(lightColor, 'color').onChange(() => {
-  pointLight.color.set(lightColor.color)
-})
+  pointLight.color.set(lightColor.color);
+});
 /**
  * Sizes
  */

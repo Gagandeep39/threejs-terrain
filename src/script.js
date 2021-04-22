@@ -16,23 +16,33 @@ const geometry = new THREE.PlaneBufferGeometry(3, 3, 64, 64);
 
 // Materials
 const material = new THREE.MeshStandardMaterial({
-  color: 'red',
+  color: 'gray',
 });
 
 // Mesh
 const plane = new THREE.Mesh(geometry, material);
+plane.rotation.x = 181
 scene.add(plane);
-gui.add(plane.rotation, 'x')
-
+gui.add(plane.rotation, 'x').min(0).max(600).step(1);
 
 // Lights
 
-const pointLight = new THREE.PointLight(0xffffff, 0.1);
+// Fixes dark oject
+const pointLight = new THREE.PointLight(0xffffff, 2);
 pointLight.position.x = 2;
 pointLight.position.y = 3;
 pointLight.position.z = 4;
 scene.add(pointLight);
 
+gui.add(pointLight.position, 'x');
+gui.add(pointLight.position, 'y');
+gui.add(pointLight.position, 'z');
+const lightColor = {
+  color: '#00ff00',
+};
+gui.addColor(lightColor, 'color').onChange(() => {
+  pointLight.color.set(lightColor.color)
+})
 /**
  * Sizes
  */
